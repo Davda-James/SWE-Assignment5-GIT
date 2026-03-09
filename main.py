@@ -57,7 +57,7 @@ def main():
                 print(f"{idx}. {task}")
 
         elif choice == "5":
-            completed_tasks = todo.view_pending_tasks()
+            completed_tasks = todo.completed_tasks()
             print("\nCompleted Tasks:")
             for idx, task in enumerate(completed_tasks, 1):
                 print(f"{idx}. {task}")
