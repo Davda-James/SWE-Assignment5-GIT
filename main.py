@@ -9,11 +9,21 @@ class ToDO:
     def remove_task(self, task):
         if task in self.tasks:
             self.tasks.remove(task)
+        else:
+            print("Task not found.")
 
     def complete_task(self, task):
         if task in self.tasks:
             self.tasks.remove(task)
             self.completed_tasks.append(task)
+        else:
+            print("Task not found.")
+
+    def clear_completed(self):
+        self.completed_tasks.clear()
+
+    def total_tasks(self):
+        return len(self.tasks) + len(self.completed_tasks)
 
     def view_pending_tasks(self):
         return self.tasks
@@ -31,7 +41,9 @@ def main():
         print("3. Complete Task")
         print("4. View Pending Tasks")
         print("5. View Completed Tasks")
-        print("6. Exit")
+        print("6. Show Total Tasks")
+        print("7. Clear Completed Tasks")
+        print("8. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -43,26 +55,35 @@ def main():
         elif choice == "2":
             task = input("Enter the task to remove: ")
             todo.remove_task(task)
-            print(f"Task '{task}' removed.")
 
         elif choice == "3":
             task = input("Enter the task to complete: ")
             todo.complete_task(task)
-            print(f"Task '{task}' completed.")
 
         elif choice == "4":
             pending_tasks = todo.view_pending_tasks()
             print("\nPending Tasks:")
+            if not pending_tasks:
+                print("No pending tasks.")
             for idx, task in enumerate(pending_tasks, 1):
                 print(f"{idx}. {task}")
 
         elif choice == "5":
-            completed_tasks = todo.completed_tasks()
+            completed_tasks = todo.view_completed_tasks()
             print("\nCompleted Tasks:")
+            if not completed_tasks:
+                print("No completed tasks.")
             for idx, task in enumerate(completed_tasks, 1):
                 print(f"{idx}. {task}")
 
         elif choice == "6":
+            print("Total tasks:", todo.total_tasks())
+
+        elif choice == "7":
+            todo.clear_completed()
+            print("Completed tasks cleared.")
+
+        elif choice == "8":
             print("Exiting the application.")
             break
 
